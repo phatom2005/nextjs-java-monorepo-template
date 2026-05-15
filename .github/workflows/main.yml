@@ -76,7 +76,7 @@ jobs:
         with:
           # Context để ở Solution level để Docker thấy file .sln
           context: ./project/backend
-          file: ./project/backend/ProjectTemplate-WebApp/ProjectTemplate-WebApp/Dockerfile
+          file: ./project/backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-backend:latest
 
