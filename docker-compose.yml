@@ -23,21 +23,18 @@ services:
   # 2. BACKEND (.NET API)
   # ---------------------------------------------
   backend:
-    build:
-      context: ./project/backend # Trỏ vào thư mục backend
-      dockerfile: ProjectTemplate-WebApp/ProjectTemplate-WebApp/Dockerfile # ĐƯỜNG DẪN NÀY QUAN TRỌNG: Sửa lại theo tên project API của bạn
-    container_name: my_dotnet_api
-    restart: always
+    build: ./project/backend
+    ports:
+      - "5000:8080"
+    environment:
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "5000:8080" # Cổng 8080 là mặc định của .NET 8 trong Docker
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      # Tiêm chuỗi kết nối Database vào C#
-      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=MyProjectDb;Username=admin;Password=${DB_PASSWORD}
-
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      retries: 5
   # ---------------------------------------------
   # 3. FRONTEND (Next.js)
   # ---------------------------------------------
