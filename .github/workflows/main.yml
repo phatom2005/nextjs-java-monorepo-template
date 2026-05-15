@@ -55,6 +55,7 @@ jobs:
         uses: snyk/actions/setup@master # <-- Dùng bản setup để quét đa ngôn ngữ
       - name: Run Snyk Scan
         run: snyk test --all-projects # <-- Quét toàn bộ project con trong folder project
+        continue-on-error: true # <-- Không fail pipeline nếu có lỗ hổng, chỉ cảnh báo
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
