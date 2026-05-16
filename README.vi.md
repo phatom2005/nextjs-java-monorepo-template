@@ -1,21 +1,21 @@
 # Full-Stack Monorepo Template
 
-[![CI/CD Pipeline](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/actions/workflows/main.yml/badge.svg)](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/actions)
-[![CodeQL](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/actions/workflows/github-code-scanning/codeql)
+[![CI/CD Pipeline](https://github.com/phatom2005/nextjs-java-monorepo-template/actions/workflows/main.yml/badge.svg)](https://github.com/phatom2005/nextjs-java-monorepo-template/actions)
+[![CodeQL](https://github.com/phatom2005/nextjs-java-monorepo-template/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/phatom2005/nextjs-java-monorepo-template/actions/workflows/github-code-scanning/codeql)
 ![Security Status](https://img.shields.io/badge/Security-Snyk_Protected-blueviolet?logo=snyk)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 *Đọc bằng ngôn ngữ khác: [English](README.md)*
 
 > **Lean, Secure, and Scalable.** 
-> Một bộ khung dự án hoàn chỉnh sử dụng **Next.js** và **.NET 9**.
+> Một bộ khung dự án hoàn chỉnh sử dụng **React (Next.js)** và **Java (Spring Boot)**.
 
-Đây là một template dự án mạnh mẽ được thiết kế dưới dạng monorepo, kết hợp Frontend hiện đại (Next.js) và Backend hiệu suất cao (.NET 9), được cấu hình sẵn môi trường Docker cho cả hai phía cùng cơ sở dữ liệu PostgreSQL.
+Đây là một template dự án mạnh mẽ được thiết kế dưới dạng monorepo, kết hợp Frontend hiện đại (React/Next.js) và Backend hiệu suất cao (Java/Spring Boot), được cấu hình sẵn môi trường Docker cho cả hai phía cùng cơ sở dữ liệu PostgreSQL.
 
 ## Tech Stack
 
-- **Frontend:** Next.js 15 (App Router), Tailwind CSS
-- **Backend:** .NET 9 Web API, Entity Framework Core
+- **Frontend:** React (Next.js 15 App Router), Tailwind CSS
+- **Backend:** Java (Spring Boot) Web API, Hibernate/Spring Data JPA
 - **Database:** PostgreSQL
 - **DevOps:** Docker, Docker Compose, GitHub Actions
 - **Security:** Snyk Security Scanning
@@ -25,8 +25,8 @@
 ```text
 .
 ├── project/
-│   ├── frontend/         # Mã nguồn Next.js 15
-│   └── backend/          # Mã nguồn .NET 9 Web API
+│   ├── frontend/         # Mã nguồn React (Next.js 15)
+│   └── backend/          # Mã nguồn Java (Spring Boot)
 ├── docker-compose.yml    # File cấu hình để build & chạy toàn bộ hệ thống
 ├── .env                  # Tệp chứa biến môi trường (Database Password)
 └── README.md
@@ -37,7 +37,7 @@
 ### 1. Yêu cầu hệ thống (Prerequisites)
 - [Docker & Docker CLI](https://www.docker.com/) (Khuyến nghị dùng Docker để chạy môi trường đồng bộ).
 - [Node.js](https://nodejs.org/) (Nếu muốn tự chạy frontend riêng).
-- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) (Nếu muốn phát triển và test backend cục bộ).
+- [Java JDK 17+](https://adoptium.net/) (Nếu muốn phát triển và test backend cục bộ).
 
 ### 2. Khởi chạy bằng Docker (Môi trường Development)
 Cách đơn giản nhất là khởi chạy đồng loạt cả Frontend, Backend và Database bằng một câu lệnh duy nhất:
@@ -63,15 +63,15 @@ npm install
 npm run dev
 ```
 
-#### Chạy Backend độc lập (cần .NET 9 SDK):
+#### Chạy Backend độc lập (cần Java JDK):
 ```bash
-cd project/backend/ProjectTemplate-WebApp
-dotnet run
+cd project/backend
+./mvnw spring-boot:run
 ```
-*(Lưu ý: Nếu chạy thủ công, bạn cần đảm bảo PostgreSQL đang chạy local hoặc thay đổi chuỗi kết nối Database nằm bên trong `appsettings.Development.json` khớp với thông tin kết nối DB của bạn).*
+*(Lưu ý: Nếu chạy thủ công, bạn cần đảm bảo PostgreSQL đang chạy local hoặc thay đổi chuỗi kết nối Database nằm bên trong `application.yml` hoặc `application.properties` khớp với thông tin kết nối DB của bạn).*
 
 ## Tùy biến dự án 
-- **Tên dự án API:** Khi bạn thay đổi hoặc khởi tạo mới tên project bên trong thư mục `backend/` (VD thay vì `ProjectTemplate-WebApp`), hãy nhớ mở file `docker-compose.yml` và cập nhật lại đường dẫn cho trường `dockerfile` để trỏ vào đúng vị trí `Dockerfile` mà bạn sử dụng.
+- **Backend API:** Khi bạn thay đổi cấu trúc mã nguồn bên trong thư mục `backend/`, hãy nhớ mở file `docker-compose.yml` và cập nhật lại cấu hình nếu cần thiết để trỏ vào đúng vị trí `Dockerfile` mà bạn sử dụng.
 - **Biến môi trường Frontend:** Frontend kết nối với backend qua file biến môi trường `NEXT_PUBLIC_API_URL` được nạp sẵn qua tùy chỉnh trong `.env`/`docker-compose.yml`.
 
 ## Security / DevOps

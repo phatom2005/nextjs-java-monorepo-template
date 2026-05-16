@@ -1,21 +1,21 @@
 # Full-Stack Monorepo Template
 
-[![CI/CD Pipeline](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/actions/workflows/main.yml/badge.svg)](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/actions)
-[![CodeQL](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/actions/workflows/codeql.yml/badge.svg)](https://github.com/phatom2005/nextjs-dotnet-monorepo-template/security/code-scanning)
+[![CI/CD Pipeline](https://github.com/phatom2005/nextjs-java-monorepo-template/actions/workflows/main.yml/badge.svg)](https://github.com/phatom2005/nextjs-java-monorepo-template/actions)
+[![CodeQL](https://github.com/phatom2005/nextjs-java-monorepo-template/actions/workflows/codeql.yml/badge.svg)](https://github.com/phatom2005/nextjs-java-monorepo-template/security/code-scanning)
 ![Security Status](https://img.shields.io/badge/Security-Snyk_Protected-blueviolet?logo=snyk)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 *Read this in other languages: [Tiếng Việt](README.vi.md)*
 
 > **Lean, Secure, and Scalable.** 
-> A complete project foundation using **Next.js** and **.NET 9**.
+> A complete project foundation using **React (Next.js)** and **Java (Spring Boot)**.
 
-This is a powerful project template designed as a monorepo, combining a modern Frontend (Next.js) and a high-performance Backend (.NET 9), pre-configured with a Dockerized environment for both applications along with a PostgreSQL database.
+This is a powerful project template designed as a monorepo, combining a modern Frontend (React/Next.js) and a high-performance Backend (Java/Spring Boot), pre-configured with a Dockerized environment for both applications along with a PostgreSQL database.
 
 ## Tech Stack
 
-- **Frontend:** Next.js 15 (App Router), Tailwind CSS
-- **Backend:** .NET 9 Web API, Entity Framework Core
+- **Frontend:** React (Next.js 15 App Router), Tailwind CSS
+- **Backend:** Java (Spring Boot) Web API, Hibernate/Spring Data JPA
 - **Database:** PostgreSQL
 - **DevOps:** Docker, Docker Compose, GitHub Actions
 - **Security:** Snyk Security Scanning
@@ -25,8 +25,8 @@ This is a powerful project template designed as a monorepo, combining a modern F
 ```text
 .
 ├── project/
-│   ├── frontend/         # Next.js 15 source code
-│   └── backend/          # .NET 9 Web API source code
+│   ├── frontend/         # React (Next.js 15) source code
+│   └── backend/          # Java (Spring Boot) source code
 ├── docker-compose.yml    # Configuration file to build & run the entire system
 ├── .env                  # Environment variables file (Database Password)
 └── README.md
@@ -37,7 +37,7 @@ This is a powerful project template designed as a monorepo, combining a modern F
 ### 1. Prerequisites
 - [Docker & Docker CLI](https://www.docker.com/) (Recommended for a consistent development environment).
 - [Node.js](https://nodejs.org/) (If you want to run the frontend independently).
-- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) (If you want to develop and test the backend locally).
+- [Java JDK 17+](https://adoptium.net/) (If you want to develop and test the backend locally).
 
 ### 2. Run with Docker (Development Environment)
 The easiest way is to launch the Frontend, Backend, and Database simultaneously with a single command:
@@ -63,15 +63,15 @@ npm install
 npm run dev
 ```
 
-#### Run Backend independently (requires .NET 9 SDK):
+#### Run Backend independently (requires Java JDK):
 ```bash
-cd project/backend/ProjectTemplate-WebApp
-dotnet run
+cd project/backend
+./mvnw spring-boot:run
 ```
-*(Note: If running manually, ensure PostgreSQL is running locally or modify the database connection string inside `appsettings.Development.json` to match your local DB connection).*
+*(Note: If running manually, ensure PostgreSQL is running locally or modify the database connection string inside `application.yml` or `application.properties` to match your local DB connection).*
 
 ## Customizing the Project 
-- **API Project Name:** When you change or create a new project name inside the `backend/` directory (e.g., instead of `ProjectTemplate-WebApp`), remember to open `docker-compose.yml` and update the `dockerfile` path to point to the correct `Dockerfile` you are using.
+- **API Project:** When you change the project structure inside the `backend/` directory, remember to open `docker-compose.yml` and update the `dockerfile` path if needed.
 - **Frontend Environment Variables:** The frontend connects to the backend using the `NEXT_PUBLIC_API_URL` environment variable, which is pre-configured via `.env`/`docker-compose.yml`.
 
 ## Security / DevOps
