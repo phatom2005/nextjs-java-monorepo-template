@@ -19,7 +19,7 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Item getItemById(@NonNull Long id) {
+    public @NonNull Item getItemById(@NonNull Long id) {
         return itemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
     }
